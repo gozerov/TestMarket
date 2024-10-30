@@ -6,13 +6,34 @@ plugins {
     id(libs.plugins.androidApplication.get().pluginId)
     id(libs.plugins.composeMultiplatform.get().pluginId)
     id(libs.plugins.composeCompiler.get().pluginId)
+
+    kotlin("native.cocoapods")
 }
+
+version = "1.0.0"
 
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
+        }
+    }
+
+    cocoapods {
+        summary = "Test Market"
+        homepage = "https://github.com/sample/TestMarket"
+
+        ios.deploymentTarget = "17.0"
+
+        podfile = project.file("../iosApp/Podfile")
+        framework {
+            baseName = "composeApp"
+            isStatic = true
+            @OptIn(ExperimentalKotlinGradlePluginApi::class)
+            transitiveExport = false
+            export(project(":common:core"))
+            export(project(":common:umbrella"))
         }
     }
 
@@ -34,6 +55,9 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
+            implementation(project(":common:umbrella"))
+            implementation(project(":common:core"))
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
@@ -43,6 +67,13 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
         }
+
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+            api(project(":common:core"))
+            api(project(":common:umbrella"))
+        }
+
     }
 }
 

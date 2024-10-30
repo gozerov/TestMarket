@@ -11,7 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import navigation.bottom_bar.BottomNavigation
 
 @Composable
-fun KMPMarketApp() {
+fun TestMarketApp() {
     val navController: NavHostController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = backStackEntry?.destination?.route ?: Screen.BottomTabs.route

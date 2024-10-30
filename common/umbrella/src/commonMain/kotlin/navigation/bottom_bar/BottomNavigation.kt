@@ -20,7 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import navigation.Screen
-import theme.KMPMarketTheme
+import theme.TestMarketTheme
 
 @Composable
 fun BottomNavigation() {
@@ -66,7 +66,7 @@ fun BottomNavigation() {
 
         BottomNavigation(
             modifier = Modifier.align(Alignment.BottomStart),
-            backgroundColor = KMPMarketTheme.colors.primaryBackground
+            backgroundColor = TestMarketTheme.colors.primaryBackground
         ) {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentDestination = navBackStackEntry?.destination
@@ -74,7 +74,7 @@ fun BottomNavigation() {
             items.forEach { screen ->
                 BottomNavigationItem(
                     icon = { },
-                    label = { Text(screen, color = KMPMarketTheme.colors.text) },
+                    label = { Text(screen, color = TestMarketTheme.colors.text) },
                     selected = currentDestination?.hierarchy?.any { it.route == screen } == true,
                     onClick = {
                         navController.navigate(screen) {

@@ -14,7 +14,7 @@ data class TestMarketColors(
 )
 
 
-object KMPMarketTheme {
+object TestMarketTheme {
     val colors: TestMarketColors
         @Composable
         get() = LocalTestMarketColors.current
