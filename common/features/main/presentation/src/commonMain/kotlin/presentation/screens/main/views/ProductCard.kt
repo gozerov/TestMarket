@@ -71,7 +71,7 @@ fun ProductCard(
             )
             Spacer(modifier = Modifier.height(12.dp))
             Row {
-                DefaultButton(modifier = Modifier.width(100.dp), onClick = onCartClicked) {
+                DefaultButton(modifier = Modifier.width(120.dp), onClick = onCartClicked) {
                     Text(
                         text = stringResource(Res.string.in_cart),
                         color = TestMarketTheme.colors.text,
