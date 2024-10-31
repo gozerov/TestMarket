@@ -4,9 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Divider
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
@@ -63,19 +65,21 @@ fun MainScreen(
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) {
         Column(
-            modifier = Modifier.padding(horizontal = 16.dp).fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ) {
-            Text(
-                modifier = Modifier.padding(top = 16.dp),
-                text = stringResource(Res.string.recommend),
-                color = TestMarketTheme.colors.text,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(modifier = Modifier.height(24.dp))
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
+                item {
+                    Text(
+                        modifier = Modifier.padding(start = 16.dp, top = 24.dp, bottom = 12.dp),
+                        text = stringResource(Res.string.recommend),
+                        color = TestMarketTheme.colors.text,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+
                 items(viewState.products.size) { ind ->
 
                     val product = viewState.products[ind]
@@ -90,10 +94,22 @@ fun MainScreen(
                             isAddedToShoppingList.value = !isAddedToShoppingList.value
                         },
                         isAddedToCart,
-                        isAddedToShoppingList
+                        isAddedToShoppingList,
+                        isLastItem = ind == viewState.products.size - 1
                     )
+
+                }
+
+                item {
+                    if (viewState.products.isNotEmpty()) {
+                        Divider(
+                            modifier = Modifier.padding(start = 16.dp).fillMaxWidth(),
+                            color = TestMarketTheme.colors.secondary
+                        )
+                    }
                 }
             }
+
         }
     }
 }

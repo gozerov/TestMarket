@@ -27,8 +27,10 @@ class MainViewModel : BaseViewModel<MainViewState, MainViewAction, MainViewEvent
                     runCatchingNonCancellation {
                         getProductsUseCase.invoke()
                     }
-                        .onSuccess { products ->
-                            viewState = viewState.copy(products = products.toProductList())
+                        .onSuccess { productsFlow ->
+                            productsFlow.collect { products ->
+                                viewState = viewState.copy(products = products.toProductList())
+                            }
                         }
                         .onFailure { error ->
                             viewAction = MainViewAction.ShowError(error.message.toString())

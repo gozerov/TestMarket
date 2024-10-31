@@ -1,5 +1,7 @@
 package data.di
 
+import data.cache.ProductsCache
+import data.cache.ProductsCacheImpl
 import data.remote.ProductsRemote
 import data.remote.ProductsRemoteImpl
 import data.repositories.ProductRepositoryImpl
@@ -14,7 +16,9 @@ import org.kodein.di.instance
 
 val mainDataModule = DI.Module("marketDataModule") {
     bindSingleton<ProductsRemote> { ProductsRemoteImpl(instance()) }
-    bindSingleton<ProductsRepository> { ProductRepositoryImpl(instance()) }
+    bindSingleton<ProductsRepository> { ProductRepositoryImpl(instance(), instance()) }
+
+    bindSingleton<ProductsCache> { ProductsCacheImpl(instance()) }
 
     bindProvider<GetProductsUseCase> { GetProductsUseCase(instance()) }
     bindProvider<UpdateCartUseCase> { UpdateCartUseCase(instance()) }

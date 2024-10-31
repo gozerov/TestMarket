@@ -5,7 +5,7 @@ import composeApp
 struct iOSApp: App {
 
    init() {
-        PlatformSDK().doInit(platformConfiguration: PlatformConfiguration())
+        PlatformSDK().doInit(platformConfiguration: PlatformConfiguration(), driverFactory: DriverFactory())
     }
 
     var body: some Scene {

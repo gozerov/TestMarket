@@ -1,3 +1,4 @@
+import cache.DriverFactory
 import data.di.mainDataModule
 import di.Injector
 import di.coreModule
@@ -8,12 +9,14 @@ import org.kodein.di.direct
 object PlatformSDK {
 
     fun init(
-        platformConfiguration: PlatformConfiguration
+        platformConfiguration: PlatformConfiguration,
+        driverFactory: DriverFactory
     ) {
         val umbrellaModule = DI.Module(
             name = "umbrella",
             init = {
                 bindSingleton<PlatformConfiguration> { platformConfiguration }
+                bindSingleton<DriverFactory> { driverFactory }
             }
         )
 

@@ -1,0 +1,21 @@
+import kotlin.Boolean;
+
+CREATE TABLE Product(
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT,
+    image TEXT,
+    price REAL NOT NULL,
+    isInCart INTEGER AS Boolean NOT NULL DEFAULT 0,
+    isInFavorites INTEGER AS Boolean NOT NULL DEFAULT 0
+);
+
+getProducts:
+SELECT * FROM Product;
+
+insertProduct:
+INSERT INTO Product(id, name, description, image, price, isInCart, isInFavorites)
+VALUES (:id, :name, :description, :image, :price, :isInCart, :isInFavorites);
+
+clearTable:
+DELETE FROM Product;

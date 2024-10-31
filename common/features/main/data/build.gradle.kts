@@ -3,6 +3,7 @@ plugins {
     id("android-setup")
     id("compose-multiplatform-setup")
     id(libs.plugins.kotlinSerialization.get().pluginId)
+    id(libs.plugins.sql.delight.get().pluginId)
 }
 
 kotlin {
