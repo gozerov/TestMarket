@@ -8,6 +8,9 @@ inline fun <R> runCatchingNonCancellation(block: () -> R): Result<R> {
     } catch (e: CancellationException) {
         throw e
     } catch (e: Exception) {
-        Result.failure(e)
+        e.printStackTrace()
+
+        //TODO: сделать нормальную обработку ошибок
+        Result.failure(Exception("Something went wrong"))
     }
 }

@@ -20,6 +20,7 @@ coil3 = "3.0.0-alpha06"
 kodein = "7.22.0"
 ktor = "2.3.12"
 sql-delight = "2.0.1"
+immutable-collections = "0.3.8"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -49,6 +50,7 @@ coil-mp = { module = "io.coil-kt.coil3:coil", version.ref = "coil3" }
 viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewmodel"}
 navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 kodein = { module = "org.kodein.di:kodein-di", version.ref = "kodein" }
+immutable-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "immutable-collections" }
 
 
 [plugins]

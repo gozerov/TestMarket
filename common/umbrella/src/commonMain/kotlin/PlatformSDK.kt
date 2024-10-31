@@ -1,3 +1,4 @@
+import data.di.mainDataModule
 import di.Injector
 import di.coreModule
 import org.kodein.di.DI
@@ -20,7 +21,8 @@ object PlatformSDK {
             DI {
                 importAll(
                     umbrellaModule,
-                    coreModule
+                    coreModule,
+                    mainDataModule
                 )
             }.direct
         )

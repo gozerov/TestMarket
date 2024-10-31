@@ -4,7 +4,7 @@ import PlatformConfiguration
 import PlatformSDK
 import android.app.Application
 
-class KMPMarketApp : Application() {
+class TestMarketApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -14,7 +14,7 @@ class KMPMarketApp : Application() {
 
 }
 
-fun KMPMarketApp.initPlatformSDK() =
+fun TestMarketApp.initPlatformSDK() =
     PlatformSDK.init(
         platformConfiguration = PlatformConfiguration(context = applicationContext)
     )

@@ -20,6 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import navigation.Screen
+import presentation.screens.main.MainScreen
 import theme.TestMarketTheme
 
 @Composable
@@ -41,7 +42,7 @@ fun BottomNavigation() {
                 startDestination = Screen.MainFlow.Main.route,
                 route = Screen.MainFlow.BASE_ROUTE
             ) {
-                composable(Screen.MainFlow.Main.route) { Text("main", color = Color.Black) }
+                composable(Screen.MainFlow.Main.route) { MainScreen() }
             }
 
             navigation(

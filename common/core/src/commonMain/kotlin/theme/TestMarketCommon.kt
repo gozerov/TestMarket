@@ -8,9 +8,7 @@ data class TestMarketColors(
     val text: Color,
     val primary: Color,
     val primaryBackground: Color,
-    val secondaryBackground: Color,
-    val secondary: Color,
-    val accent: Color
+    val secondary: Color
 )
 
 
