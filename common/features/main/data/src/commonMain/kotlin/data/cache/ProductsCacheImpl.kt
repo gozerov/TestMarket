@@ -11,24 +11,40 @@ class ProductsCacheImpl(
 
     override suspend fun saveProducts(products: List<RemoteProduct>) {
         appDatabase.transaction {
-            appDatabase.productsQueries.clearTable()
+            appDatabase.productsQueries.deleteOldProducts()
+            val cachedIds =
+                appDatabase.productsQueries.getProducts().executeAsList().map { it.id.toInt() }
+            val productsToInsert = products.filter { dto -> dto.id !in cachedIds }
+            println(productsToInsert.toString())
 
-            products.forEach { product ->
+            productsToInsert.forEach { product ->
                 appDatabase.productsQueries.insertProduct(
                     id = product.id.toLong(),
                     name = product.title,
                     description = product.description,
                     image = product.image,
-                    price = product.price,
-                    isInCart = false,
-                    isInFavorites = false
+                    price = product.price
                 )
             }
         }
     }
 
-    override suspend fun getProducts(): List<ProductDTO> = appDatabase.productsQueries.getProducts()
-        .executeAsList()
-        .map { product -> product.toProductDTO() }
+    override suspend fun getProducts(): List<ProductDTO> =
+        appDatabase.productsQueries.getProductsWithFlags()
+            .executeAsList().map { product -> product.toProductDTO() }
+
+    override suspend fun updateCart(productId: Int, isAdding: Boolean) {
+        if (isAdding)
+            appDatabase.cartQueries.insertIntoCart(productId.toLong())
+        else
+            appDatabase.cartQueries.removeFromCart(productId.toLong())
+    }
+
+    override suspend fun updateShoppingList(productId: Int, isAdding: Boolean) {
+        if (isAdding)
+            appDatabase.shopping_listQueries.insertIntoShoppingList(productId.toLong())
+        else
+            appDatabase.shopping_listQueries.removeFromShoppingList(productId.toLong())
+    }
 
 }

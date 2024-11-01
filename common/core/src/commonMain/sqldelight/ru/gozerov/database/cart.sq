@@ -1,0 +1,16 @@
+CREATE TABLE Cart(
+    productId INTEGER NOT NULL PRIMARY KEY REFERENCES Product(id) ON DELETE CASCADE
+);
+
+insertIntoCart:
+INSERT OR IGNORE INTO Cart (productId)
+VALUES (:productId);
+
+removeFromCart:
+DELETE FROM Cart
+WHERE productId = :productId;
+
+getAllFromCart:
+SELECT Product.*
+FROM Product
+JOIN Cart ON Product.id = Cart.productId;

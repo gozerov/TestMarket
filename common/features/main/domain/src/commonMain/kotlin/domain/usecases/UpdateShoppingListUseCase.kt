@@ -9,7 +9,7 @@ class UpdateShoppingListUseCase(
     private val productsRepository: ProductsRepository
 ) {
 
-    suspend operator fun invoke(productId: Int, isAdding: Boolean): Boolean =
+    suspend operator fun invoke(productId: Int, isAdding: Boolean) =
         withContext(Dispatchers.IO) {
             return@withContext productsRepository.updateShoppingList(productId, isAdding)
         }

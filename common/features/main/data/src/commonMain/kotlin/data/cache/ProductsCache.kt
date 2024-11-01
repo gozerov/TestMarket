@@ -9,4 +9,8 @@ interface ProductsCache {
 
     suspend fun getProducts(): List<ProductDTO>
 
+    suspend fun updateCart(productId: Int, isAdding: Boolean)
+
+    suspend fun updateShoppingList(productId: Int, isAdding: Boolean)
+
 }

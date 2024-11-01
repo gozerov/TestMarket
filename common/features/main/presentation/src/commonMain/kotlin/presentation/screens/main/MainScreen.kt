@@ -2,10 +2,8 @@ package presentation.screens.main
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Divider
@@ -89,9 +87,21 @@ fun MainScreen(
                         product = product,
                         onCartClicked = {
                             isAddedToCart.value = !isAddedToCart.value
+                            viewModel.obtainEvent(
+                                MainViewEvent.UpdateProductCart(
+                                    product.id,
+                                    isAddedToCart.value
+                                )
+                            )
                         },
                         onShoppingListClicked = {
                             isAddedToShoppingList.value = !isAddedToShoppingList.value
+                            viewModel.obtainEvent(
+                                MainViewEvent.UpdateShoppingList(
+                                    product.id,
+                                    isAddedToShoppingList.value
+                                )
+                            )
                         },
                         isAddedToCart,
                         isAddedToShoppingList,

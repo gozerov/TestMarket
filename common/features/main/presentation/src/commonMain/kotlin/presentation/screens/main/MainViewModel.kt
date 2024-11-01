@@ -41,9 +41,9 @@ class MainViewModel : BaseViewModel<MainViewState, MainViewAction, MainViewEvent
                     runCatchingNonCancellation {
                         updateCartUseCase.invoke(viewEvent.productId, viewEvent.isAdding)
                     }
-                        .onSuccess { isInCart ->
+                        .onSuccess {
                             val newProducts = viewState.products.map { product ->
-                                if (product.id == viewEvent.productId) product.copy(isInCart = isInCart) else product
+                                if (product.id == viewEvent.productId) product.copy(isInCart = viewEvent.isAdding) else product
                             }.toPersistentList()
                             viewState = viewState.copy(products = newProducts)
                         }
@@ -56,9 +56,9 @@ class MainViewModel : BaseViewModel<MainViewState, MainViewAction, MainViewEvent
                     runCatchingNonCancellation {
                         updateShoppingListUseCase.invoke(viewEvent.productId, viewEvent.isAdding)
                     }
-                        .onSuccess { isInFavorites ->
+                        .onSuccess {
                             val newProducts = viewState.products.map { product ->
-                                if (product.id == viewEvent.productId) product.copy(isInFavorites = isInFavorites) else product
+                                if (product.id == viewEvent.productId) product.copy(isInFavorites = viewEvent.isAdding) else product
                             }.toPersistentList()
                             viewState = viewState.copy(products = newProducts)
                         }

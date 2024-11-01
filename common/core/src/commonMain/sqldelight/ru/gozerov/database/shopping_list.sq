@@ -1,0 +1,16 @@
+CREATE TABLE ShoppingList(
+    productId INTEGER NOT NULL PRIMARY KEY REFERENCES Product(id) ON DELETE CASCADE
+);
+
+insertIntoShoppingList:
+INSERT OR IGNORE INTO ShoppingList (productId)
+VALUES (:productId);
+
+removeFromShoppingList:
+DELETE FROM ShoppingList
+WHERE productId = :productId;
+
+getAllFromShoppingList:
+SELECT Product.*
+FROM Product
+JOIN ShoppingList ON Product.id = ShoppingList.productId;

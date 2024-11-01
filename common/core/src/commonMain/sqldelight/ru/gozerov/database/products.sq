@@ -5,17 +5,32 @@ CREATE TABLE Product(
     name TEXT NOT NULL,
     description TEXT,
     image TEXT,
-    price REAL NOT NULL,
-    isInCart INTEGER AS Boolean NOT NULL DEFAULT 0,
-    isInFavorites INTEGER AS Boolean NOT NULL DEFAULT 0
+    price REAL NOT NULL
 );
 
 getProducts:
 SELECT * FROM Product;
 
+getProductsWithFlags:
+SELECT Product.id,
+       Product.name,
+       Product.description,
+       Product.image,
+       Product.price,
+       CASE WHEN Cart.productId IS NOT NULL THEN 1 ELSE 0 END AS isInCart,
+       CASE WHEN ShoppingList.productId IS NOT NULL THEN 1 ELSE 0 END AS isInFavorites
+FROM Product
+LEFT JOIN Cart ON Product.id = Cart.productId
+LEFT JOIN ShoppingList ON Product.id = ShoppingList.productId;
+
 insertProduct:
-INSERT INTO Product(id, name, description, image, price, isInCart, isInFavorites)
-VALUES (:id, :name, :description, :image, :price, :isInCart, :isInFavorites);
+INSERT INTO Product(id, name, description, image, price)
+VALUES (:id, :name, :description, :image, :price);
+
+deleteOldProducts:
+DELETE FROM Product
+WHERE id NOT IN (SELECT productId FROM Cart)
+  AND id NOT IN (SELECT productId FROM ShoppingList);
 
 clearTable:
 DELETE FROM Product;
