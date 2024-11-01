@@ -12,9 +12,9 @@ abstract class BaseViewModel<State : Any, Action, Event>(initialState: State) : 
 
     private val _viewActions = MutableSharedFlow<Action?>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
-    public fun viewStates(): StateFlow<State> = _viewStates.asStateFlow()
+    fun viewStates(): StateFlow<State> = _viewStates.asStateFlow()
 
-    public fun viewActions(): SharedFlow<Action?> = _viewActions.asSharedFlow()
+    fun viewActions(): SharedFlow<Action?> = _viewActions.asSharedFlow()
 
     protected var viewState: State
         get() = _viewStates.value
@@ -28,7 +28,7 @@ abstract class BaseViewModel<State : Any, Action, Event>(initialState: State) : 
             _viewActions.tryEmit(value)
         }
 
-    public abstract fun obtainEvent(viewEvent: Event)
+    abstract fun obtainEvent(viewEvent: Event)
 
     fun clearAction() {
         viewAction = null
@@ -37,4 +37,5 @@ abstract class BaseViewModel<State : Any, Action, Event>(initialState: State) : 
     protected fun withViewModelScope(block: suspend CoroutineScope.() -> Unit) {
         viewModelScope.launch(block = block)
     }
+
 }

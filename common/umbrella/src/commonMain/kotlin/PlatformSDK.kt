@@ -1,5 +1,6 @@
 import cache.DriverFactory
 import data.di.mainDataModule
+import data.di.shoppingListDataModule
 import di.Injector
 import di.coreModule
 import org.kodein.di.DI
@@ -25,7 +26,8 @@ object PlatformSDK {
                 importAll(
                     umbrellaModule,
                     coreModule,
-                    mainDataModule
+                    mainDataModule,
+                    shoppingListDataModule
                 )
             }.direct
         )

@@ -14,7 +14,7 @@ import org.kodein.di.bindProvider
 import org.kodein.di.bindSingleton
 import org.kodein.di.instance
 
-val mainDataModule = DI.Module("marketDataModule") {
+val mainDataModule = DI.Module("mainDataModule") {
     bindSingleton<ProductsRemote> { ProductsRemoteImpl(instance()) }
     bindSingleton<ProductsRepository> { ProductRepositoryImpl(instance(), instance()) }
 

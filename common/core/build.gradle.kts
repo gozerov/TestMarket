@@ -6,6 +6,12 @@ plugins {
     id(libs.plugins.sql.delight.get().pluginId)
 }
 
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "ru.gozerov.test_market.common.core"
+    generateResClass = auto
+}
+
 kotlin {
     sourceSets {
         androidMain.dependencies {

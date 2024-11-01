@@ -1,9 +1,9 @@
 package data.cache.models
 
 import domain.models.ProductDTO
-import ru.gozerov.database.GetProductsWithFlags
+import ru.gozerov.database.ProductWithFlags
 
-fun GetProductsWithFlags.toProductDTO() = ProductDTO(
+fun ProductWithFlags.toProductDTO() = ProductDTO(
     id = id.toInt(),
     name = name,
     description = description,

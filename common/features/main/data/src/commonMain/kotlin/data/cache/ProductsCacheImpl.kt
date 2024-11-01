@@ -30,7 +30,7 @@ class ProductsCacheImpl(
     }
 
     override suspend fun getProducts(): List<ProductDTO> =
-        appDatabase.productsQueries.getProductsWithFlags()
+        appDatabase.productsQueries.ProductWithFlags()
             .executeAsList().map { product -> product.toProductDTO() }
 
     override suspend fun updateCart(productId: Int, isAdding: Boolean) {

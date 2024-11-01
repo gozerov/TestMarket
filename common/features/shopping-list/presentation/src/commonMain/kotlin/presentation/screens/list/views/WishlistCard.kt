@@ -1,4 +1,4 @@
-package presentation.screens.main.views
+package presentation.screens.list.views
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -13,31 +13,34 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import domain.models.ProductWithAmount
 import org.jetbrains.compose.resources.painterResource
-import presentation.screens.main.models.Product
+import ru.gozerov.test_market.common.core.Res
+import ru.gozerov.test_market.common.core.ic_cart_filled
 import ru.gozerov.test_market.common.core.ic_cart_outlined
-import ru.gozerov.test_market.common.features.main.presentation.resources.Res
-import ru.gozerov.test_market.common.features.main.presentation.resources.ic_favorite_filled
-import ru.gozerov.test_market.common.features.main.presentation.resources.ic_favorite_outlined
 import theme.TestMarketTheme
 import views.DefaultButton
 import views.DefaultDivider
 
 @Composable
-fun ProductCard(
-    product: Product,
+fun WishlistCard(
+    product: ProductWithAmount,
     onCartClicked: () -> Unit,
-    onShoppingListClicked: () -> Unit,
+    onChangeAmountClicked: () -> Unit,
+    onMenuClicked: () -> Unit,
     isAddedToCart: State<Boolean>,
-    isAddedToShoppingList: State<Boolean>,
     isLastItem: Boolean,
     modifier: Modifier = Modifier
 ) {
@@ -57,13 +60,28 @@ fun ProductCard(
                 contentScale = ContentScale.Crop
             )
             Column {
-                Text(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    text = product.name,
-                    color = TestMarketTheme.colors.text,
-                    maxLines = 1,
-                    fontSize = 14.sp
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        modifier = Modifier.padding(start = 16.dp).weight(1f),
+                        text = product.name,
+                        color = TestMarketTheme.colors.text,
+                        maxLines = 2,
+                        fontSize = 14.sp
+                    )
+                    IconButton(
+                        modifier = Modifier.padding(horizontal = 16.dp),
+                        onClick = onMenuClicked
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.MoreVert,
+                            contentDescription = null,
+                            modifier = Modifier.size(24.dp),
+                            tint = TestMarketTheme.colors.secondary
+                        )
+                    }
+                }
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
                     modifier = Modifier.padding(horizontal = 16.dp),
@@ -78,33 +96,22 @@ fun ProductCard(
                 ) {
                     DefaultButton(
                         modifier = Modifier.width(80.dp),
-                        backgroundTint =
-                        if (isAddedToCart.value) TestMarketTheme.colors.primaryBackground
-                        else TestMarketTheme.colors.primary,
-                        border =
-                        if (isAddedToCart.value) BorderStroke(1.dp, TestMarketTheme.colors.primary)
-                        else null,
-                        onClick = onCartClicked
+                        backgroundTint = TestMarketTheme.colors.primaryBackground,
+                        border = BorderStroke(1.dp, TestMarketTheme.colors.primary),
+                        onClick = onChangeAmountClicked
                     ) {
+                        Text("1 шт")
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
+                    IconButton(onClick = onCartClicked) {
                         Icon(
                             tint =
                             if (isAddedToCart.value) TestMarketTheme.colors.primary
-                            else TestMarketTheme.colors.primaryBackground,
-                            modifier = Modifier.size(20.dp),
-                            painter = painterResource(ru.gozerov.test_market.common.core.Res.drawable.ic_cart_outlined),
-                            contentDescription = null
-                        )
-                    }
-                    Spacer(modifier = Modifier.weight(1f))
-                    IconButton(onClick = onShoppingListClicked) {
-                        Icon(
-                            tint =
-                            if (isAddedToShoppingList.value) TestMarketTheme.colors.primary
                             else TestMarketTheme.colors.text,
-                            modifier = Modifier.size(32.dp),
+                            modifier = Modifier.size(24.dp),
                             painter = painterResource(
-                                if (isAddedToShoppingList.value) Res.drawable.ic_favorite_filled
-                                else Res.drawable.ic_favorite_outlined
+                                if (isAddedToCart.value) Res.drawable.ic_cart_filled
+                                else Res.drawable.ic_cart_outlined
                             ),
                             contentDescription = null
                         )

@@ -20,6 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import navigation.Screen
+import presentation.screens.list.ShoppingListScreen
 import presentation.screens.main.MainScreen
 import theme.TestMarketTheme
 
@@ -49,12 +50,7 @@ fun BottomNavigation() {
                 startDestination = Screen.ShoppingFlow.ShoppingList.route,
                 route = Screen.ShoppingFlow.BASE_ROUTE
             ) {
-                composable(Screen.ShoppingFlow.ShoppingList.route) {
-                    Text(
-                        "shopping",
-                        color = Color.Black
-                    )
-                }
+                composable(Screen.ShoppingFlow.ShoppingList.route) { ShoppingListScreen() }
             }
 
             navigation(
