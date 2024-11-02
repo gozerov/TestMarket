@@ -35,7 +35,7 @@ class ProductsCacheImpl(
 
     override suspend fun updateCart(productId: Int, isAdding: Boolean) {
         if (isAdding)
-            appDatabase.cartQueries.insertIntoCart(productId.toLong())
+            appDatabase.cartQueries.insertIntoCart(productId.toLong(), 1L)
         else
             appDatabase.cartQueries.removeFromCart(productId.toLong())
     }

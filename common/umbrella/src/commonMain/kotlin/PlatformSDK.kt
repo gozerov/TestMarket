@@ -1,4 +1,5 @@
 import cache.DriverFactory
+import data.di.cartDataModule
 import data.di.mainDataModule
 import data.di.shoppingListDataModule
 import di.Injector
@@ -27,7 +28,8 @@ object PlatformSDK {
                     umbrellaModule,
                     coreModule,
                     mainDataModule,
-                    shoppingListDataModule
+                    shoppingListDataModule,
+                    cartDataModule
                 )
             }.direct
         )

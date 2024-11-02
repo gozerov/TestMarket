@@ -1,4 +1,5 @@
 <resources>
     <string name="shopping_list">Список покупок</string>
     <string name="remove">Удалить</string>
+    <string name="list_is_empty">Список покупок пуст</string>
 </resources>

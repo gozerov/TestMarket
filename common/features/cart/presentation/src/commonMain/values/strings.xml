@@ -1,0 +1,4 @@
+<resources>
+    <string name="cart_is_empty">Корзина пуста</string>
+    <string name="cart">Корзина</string>
+</resources>

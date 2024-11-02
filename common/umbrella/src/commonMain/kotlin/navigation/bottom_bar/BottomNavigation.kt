@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -20,6 +19,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import navigation.Screen
+import presentation.screens.cart.CartScreen
 import presentation.screens.list.ShoppingListScreen
 import presentation.screens.main.MainScreen
 import theme.TestMarketTheme
@@ -57,7 +57,7 @@ fun BottomNavigation() {
                 startDestination = Screen.CartFlow.Cart.route,
                 route = Screen.CartFlow.BASE_ROUTE
             ) {
-                composable(Screen.CartFlow.Cart.route) { Text("cart", color = Color.Black) }
+                composable(Screen.CartFlow.Cart.route) { CartScreen() }
             }
         }
 

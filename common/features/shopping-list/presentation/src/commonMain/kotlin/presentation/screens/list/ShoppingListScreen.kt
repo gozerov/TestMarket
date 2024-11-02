@@ -1,14 +1,9 @@
 package presentation.screens.list
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
-import androidx.compose.material.Text
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -19,21 +14,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import domain.models.ProductWithAmount
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.stringResource
 import presentation.screens.list.models.ShoppingListViewAction
 import presentation.screens.list.models.ShoppingListViewEvent
-import presentation.screens.list.views.RemoveFromListSheet
-import presentation.screens.list.views.WishlistCard
-import ru.gozerov.test_market.common.features.`shopping-list`.presentation.resources.Res
-import ru.gozerov.test_market.common.features.`shopping-list`.presentation.resources.shopping_list
+import presentation.screens.list.views.EmptyShoppingListView
+import presentation.screens.list.views.FilledShoppingListView
+import presentation.screens.list.views.RemoveFromListSheetContent
 import theme.TestMarketTheme
-import views.DefaultDivider
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -81,7 +70,7 @@ fun ShoppingListScreen(
                 sheetState = sheetState
             ) {
                 currentProduct.value?.let { product ->
-                    RemoveFromListSheet(
+                    RemoveFromListSheetContent(
                         product = product,
                         onRemoveClicked = {
                             viewModel.obtainEvent(
@@ -94,54 +83,22 @@ fun ShoppingListScreen(
                 }
             }
         }
-        Column(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Text(
-                modifier = Modifier.padding(start = 16.dp, top = 24.dp),
-                text = stringResource(Res.string.shopping_list),
-                color = TestMarketTheme.colors.text,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            DefaultDivider(modifier = Modifier.padding(top = 8.dp, bottom = 16.dp))
-
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                items(viewState.products.size) { ind ->
-
-                    val product = viewState.products[ind]
-                    val isAddedToCart = remember { mutableStateOf(product.isInCart) }
-                    WishlistCard(
-                        product = product,
-                        onCartClicked = {
-                            isAddedToCart.value = !isAddedToCart.value
-                            viewModel.obtainEvent(
-                                ShoppingListViewEvent.AddProductToCart(
-                                    product.id,
-                                    isAddedToCart.value
-                                )
-                            )
-                        },
-                        onChangeAmountClicked = {},
-                        onMenuClicked = {
-                            currentProduct.value = product
-                            showBottomSheet.value = true
-                        },
-                        isAddedToCart = isAddedToCart,
-                        isLastItem = ind == viewState.products.size - 1
+        if (viewState.products.isNotEmpty()) {
+            FilledShoppingListView(
+                products = viewState.products,
+                onCartClicked = { product, isAddedToCart: Boolean ->
+                    viewModel.obtainEvent(
+                        ShoppingListViewEvent.AddProductToCart(product.id, isAddedToCart)
                     )
-
-                }
-
-                item {
-                    if (viewState.products.isNotEmpty()) {
-                        DefaultDivider()
-                    }
-                }
-            }
+                },
+                onMenuClicked = { product ->
+                    currentProduct.value = product
+                    showBottomSheet.value = true
+                },
+                onChangeAmountClicked = { }
+            )
+        } else {
+            EmptyShoppingListView()
         }
     }
 }

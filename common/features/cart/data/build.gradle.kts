@@ -9,7 +9,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api(project(":common:features:main:domain"))
+                api(project(":common:features:cart:domain"))
                 implementation(project(":common:core"))
 
                 implementation(libs.kodein)

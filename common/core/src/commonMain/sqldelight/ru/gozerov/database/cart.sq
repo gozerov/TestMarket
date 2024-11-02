@@ -1,14 +1,19 @@
 CREATE TABLE Cart(
-    productId INTEGER NOT NULL PRIMARY KEY REFERENCES Product(id) ON DELETE CASCADE
+    productId INTEGER NOT NULL PRIMARY KEY REFERENCES Product(id),
+    isSelected INTEGER NOT NULL DEFAULT 1
 );
 
 insertIntoCart:
-INSERT OR IGNORE INTO Cart (productId)
-VALUES (:productId);
+INSERT OR IGNORE INTO Cart (productId, isSelected)
+VALUES (:productId, :isSelected);
 
 removeFromCart:
 DELETE FROM Cart
 WHERE productId = :productId;
+
+deleteFromCartByIds:
+DELETE FROM Cart
+WHERE productId IN :productIds;
 
 getAllFromCart:
 SELECT Product.*

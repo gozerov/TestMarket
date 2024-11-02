@@ -14,3 +14,7 @@ getAllFromShoppingList:
 SELECT Product.*
 FROM Product
 JOIN ShoppingList ON Product.id = ShoppingList.productId;
+
+insertIntoShoppingListIfNotExists:
+INSERT OR IGNORE INTO ShoppingList (productId)
+VALUES (:productId);

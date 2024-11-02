@@ -3,3 +3,13 @@ plugins {
     id("android-setup")
     id("compose-multiplatform-setup")
 }
+
+kotlin {
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation(project(path = ":common:core"))
+            }
+        }
+    }
+}
