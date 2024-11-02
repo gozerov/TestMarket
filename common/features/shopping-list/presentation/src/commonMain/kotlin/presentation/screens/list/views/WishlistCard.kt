@@ -82,7 +82,6 @@ fun WishlistCard(
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(12.dp))
                 Text(
                     modifier = Modifier.padding(horizontal = 16.dp),
                     text = "${product.price}₽",

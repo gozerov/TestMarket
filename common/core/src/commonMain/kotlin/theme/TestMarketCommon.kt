@@ -8,7 +8,8 @@ data class TestMarketColors(
     val text: Color,
     val primary: Color,
     val primaryBackground: Color,
-    val secondary: Color
+    val secondary: Color,
+    val error: Color
 )
 
 
