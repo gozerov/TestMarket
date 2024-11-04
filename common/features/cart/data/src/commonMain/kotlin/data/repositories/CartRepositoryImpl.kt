@@ -19,7 +19,15 @@ class CartRepositoryImpl(
 
     override suspend fun addProductsToShoppingList(ids: List<Int>): List<CheckedProduct> {
         cartCache.addProductsToShoppingList(ids)
+        cartCache.removeProductsFromCart(ids)
         return getCart()
+    }
+
+    override suspend fun checkAll(isChecked: Boolean): List<CheckedProduct> {
+        cartCache.checkAll(isChecked)
+        val products = getCart()
+        println(products)
+        return products
     }
 
     override suspend fun updateProductStatus(productId: Int, isChecked: Boolean) =

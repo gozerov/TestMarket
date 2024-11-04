@@ -27,4 +27,8 @@ class CartCacheImpl(
         }
     }
 
+    override suspend fun checkAll(isChecked: Boolean) {
+        appDatabase.cartQueries.updateAllSelectionStatus(if (isChecked) 1L else 0L)
+    }
+
 }

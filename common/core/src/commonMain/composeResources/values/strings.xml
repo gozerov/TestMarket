@@ -1,0 +1,5 @@
+<resources>
+    <string name="main">Главная</string>
+    <string name="shopping_list">Список покупок</string>
+    <string name="cart">Корзина</string>
+</resources>

@@ -2,12 +2,12 @@ package presentation.screens.list.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.sp
 import domain.models.ProductWithAmount
 import kotlinx.collections.immutable.ImmutableList
 import org.jetbrains.compose.resources.stringResource
-import presentation.screens.list.models.ShoppingListViewEvent
 import ru.gozerov.test_market.common.features.`shopping-list`.presentation.resources.Res
 import ru.gozerov.test_market.common.features.`shopping-list`.presentation.resources.shopping_list
 import theme.TestMarketTheme
@@ -42,11 +41,14 @@ fun FilledShoppingListView(
             fontWeight = FontWeight.Bold
         )
 
-        DefaultDivider(modifier = Modifier.padding(top = 8.dp, bottom = 16.dp))
+        DefaultDivider(modifier = Modifier.padding(start = 16.dp, top = 16.dp))
 
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            item {
+                Spacer(modifier = Modifier.padding(top = 16.dp))
+            }
             items(products.size) { ind ->
 
                 val product = products[ind]
@@ -61,7 +63,6 @@ fun FilledShoppingListView(
                     onMenuClicked = {
                         onMenuClicked(product)
                     },
-                    isAddedToCart = isAddedToCart,
                     isLastItem = ind == products.size - 1
                 )
 
@@ -69,7 +70,7 @@ fun FilledShoppingListView(
 
             item {
                 if (products.isNotEmpty()) {
-                    DefaultDivider()
+                    DefaultDivider(modifier = Modifier.padding(start = 16.dp, top = 8.dp))
                 }
             }
         }

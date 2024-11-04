@@ -10,6 +10,8 @@ interface CartRepository {
 
     suspend fun addProductsToShoppingList(ids: List<Int>): List<CheckedProduct>
 
+    suspend fun checkAll(isChecked: Boolean): List<CheckedProduct>
+
     suspend fun updateProductStatus(productId: Int, isChecked: Boolean)
 
 }

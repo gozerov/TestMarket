@@ -12,4 +12,6 @@ interface CartCache {
 
     suspend fun addProductsToShoppingList(ids: List<Int>)
 
+    suspend fun checkAll(isChecked: Boolean)
+
 }

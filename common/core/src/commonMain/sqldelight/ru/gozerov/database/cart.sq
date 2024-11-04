@@ -15,6 +15,10 @@ deleteFromCartByIds:
 DELETE FROM Cart
 WHERE productId IN :productIds;
 
+updateAllSelectionStatus:
+UPDATE Cart
+SET isSelected = :isSelected;
+
 getAllFromCart:
 SELECT Product.*
 FROM Product

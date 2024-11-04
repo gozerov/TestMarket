@@ -5,6 +5,7 @@ import data.cache.CartCacheImpl
 import data.repositories.CartRepositoryImpl
 import domain.repositories.CartRepository
 import domain.usecases.AddProductsToShoppingListUseCase
+import domain.usecases.CheckAllUseCase
 import domain.usecases.GetCartUseCase
 import domain.usecases.RemoveProductsFromCartUseCase
 import domain.usecases.UpdateProductStatusUseCase
@@ -19,6 +20,7 @@ val cartDataModule = DI.Module("cartDataModule") {
 
     bindProvider<GetCartUseCase> { GetCartUseCase(instance()) }
     bindProvider<UpdateProductStatusUseCase> { UpdateProductStatusUseCase(instance()) }
+    bindProvider<CheckAllUseCase> { CheckAllUseCase(instance()) }
     bindProvider<AddProductsToShoppingListUseCase> { AddProductsToShoppingListUseCase(instance()) }
     bindProvider<RemoveProductsFromCartUseCase> { RemoveProductsFromCartUseCase(instance()) }
 }

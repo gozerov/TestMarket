@@ -24,9 +24,9 @@ import coil3.compose.AsyncImage
 import org.jetbrains.compose.resources.painterResource
 import presentation.screens.main.models.Product
 import ru.gozerov.test_market.common.core.ic_cart_outlined
+import ru.gozerov.test_market.common.core.ic_favorite_outlined
 import ru.gozerov.test_market.common.features.main.presentation.resources.Res
 import ru.gozerov.test_market.common.features.main.presentation.resources.ic_favorite_filled
-import ru.gozerov.test_market.common.features.main.presentation.resources.ic_favorite_outlined
 import theme.TestMarketTheme
 import views.DefaultButton
 import views.DefaultDivider
@@ -36,8 +36,6 @@ fun ProductCard(
     product: Product,
     onCartClicked: () -> Unit,
     onShoppingListClicked: () -> Unit,
-    isAddedToCart: State<Boolean>,
-    isAddedToShoppingList: State<Boolean>,
     isLastItem: Boolean,
     modifier: Modifier = Modifier
 ) {
@@ -79,16 +77,16 @@ fun ProductCard(
                     DefaultButton(
                         modifier = Modifier.width(80.dp),
                         backgroundTint =
-                        if (isAddedToCart.value) TestMarketTheme.colors.primaryBackground
+                        if (product.isInCart) TestMarketTheme.colors.primaryBackground
                         else TestMarketTheme.colors.primary,
                         border =
-                        if (isAddedToCart.value) BorderStroke(1.dp, TestMarketTheme.colors.primary)
+                        if (product.isInCart) BorderStroke(1.dp, TestMarketTheme.colors.primary)
                         else null,
                         onClick = onCartClicked
                     ) {
                         Icon(
                             tint =
-                            if (isAddedToCart.value) TestMarketTheme.colors.primary
+                            if (product.isInCart) TestMarketTheme.colors.primary
                             else TestMarketTheme.colors.primaryBackground,
                             modifier = Modifier.size(20.dp),
                             painter = painterResource(ru.gozerov.test_market.common.core.Res.drawable.ic_cart_outlined),
@@ -99,19 +97,19 @@ fun ProductCard(
                     IconButton(onClick = onShoppingListClicked) {
                         Icon(
                             tint =
-                            if (isAddedToShoppingList.value) TestMarketTheme.colors.primary
+                            if (product.isInFavorites) TestMarketTheme.colors.primary
                             else TestMarketTheme.colors.text,
                             modifier = Modifier.size(32.dp),
                             painter = painterResource(
-                                if (isAddedToShoppingList.value) Res.drawable.ic_favorite_filled
-                                else Res.drawable.ic_favorite_outlined
+                                if (product.isInFavorites) Res.drawable.ic_favorite_filled
+                                else ru.gozerov.test_market.common.core.Res.drawable.ic_favorite_outlined
                             ),
                             contentDescription = null
                         )
                     }
                 }
                 if (!isLastItem)
-                    DefaultDivider()
+                    DefaultDivider(modifier = Modifier.padding(start = 16.dp, top = 8.dp))
             }
         }
     }

@@ -3,10 +3,8 @@ package presentation.screens.main
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Divider
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.SnackbarHostState
@@ -14,7 +12,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -40,10 +37,12 @@ fun MainScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
+
     val viewState = viewModel.viewStates().collectAsState().value
     val viewAction = viewModel.viewActions().collectAsState(null).value
 
     LaunchedEffect(null) {
+        println("lets go")
         viewModel.obtainEvent(MainViewEvent.GetProducts)
     }
 
@@ -82,30 +81,25 @@ fun MainScreen(
                 items(viewState.products.size) { ind ->
 
                     val product = viewState.products[ind]
-                    val isAddedToCart = remember { mutableStateOf(product.isInCart) }
-                    val isAddedToShoppingList = remember { mutableStateOf(product.isInFavorites) }
                     ProductCard(
                         product = product,
                         onCartClicked = {
-                            isAddedToCart.value = !isAddedToCart.value
+
                             viewModel.obtainEvent(
                                 MainViewEvent.UpdateProductCart(
                                     product.id,
-                                    isAddedToCart.value
+                                    !product.isInCart
                                 )
                             )
                         },
                         onShoppingListClicked = {
-                            isAddedToShoppingList.value = !isAddedToShoppingList.value
                             viewModel.obtainEvent(
                                 MainViewEvent.UpdateShoppingList(
                                     product.id,
-                                    isAddedToShoppingList.value
+                                    !product.isInFavorites
                                 )
                             )
                         },
-                        isAddedToCart,
-                        isAddedToShoppingList,
                         isLastItem = ind == viewState.products.size - 1
                     )
 
@@ -113,7 +107,7 @@ fun MainScreen(
 
                 item {
                     if (viewState.products.isNotEmpty()) {
-                        DefaultDivider()
+                        DefaultDivider(modifier = Modifier.padding(start = 16.dp, top = 8.dp))
                     }
                 }
             }

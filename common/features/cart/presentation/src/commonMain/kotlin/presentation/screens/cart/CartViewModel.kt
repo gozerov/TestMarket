@@ -3,6 +3,7 @@ package presentation.screens.cart
 import androidx.lifecycle.viewModelScope
 import di.Injector
 import domain.usecases.AddProductsToShoppingListUseCase
+import domain.usecases.CheckAllUseCase
 import domain.usecases.GetCartUseCase
 import domain.usecases.RemoveProductsFromCartUseCase
 import domain.usecases.UpdateProductStatusUseCase
@@ -19,6 +20,7 @@ class CartViewModel : BaseViewModel<CartViewState, CartViewAction, CartViewEvent
     private val getCartUseCase: GetCartUseCase = Injector.instance()
     private val removeProductsFromCartUseCase: RemoveProductsFromCartUseCase = Injector.instance()
     private val updateProductStatusUseCase: UpdateProductStatusUseCase = Injector.instance()
+    private val checkAllUseCase: CheckAllUseCase = Injector.instance()
     private val addProductsToShoppingListUseCase: AddProductsToShoppingListUseCase =
         Injector.instance()
 
@@ -69,6 +71,18 @@ class CartViewModel : BaseViewModel<CartViewState, CartViewAction, CartViewEvent
                 is CartViewEvent.AddToShoppingList -> {
                     runCatchingNonCancellation {
                         addProductsToShoppingListUseCase.invoke(viewEvent.productIds)
+                    }
+                        .onSuccess { products ->
+                            viewState = viewState.copy(products = products.toImmutableList())
+                        }
+                        .onFailure { e ->
+                            viewAction = CartViewAction.ShowError(e.message.toString())
+                        }
+                }
+
+                is CartViewEvent.CheckAll -> {
+                    runCatchingNonCancellation {
+                        checkAllUseCase.invoke(viewEvent.isChecked)
                     }
                         .onSuccess { products ->
                             viewState = viewState.copy(products = products.toImmutableList())

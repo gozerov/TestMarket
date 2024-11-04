@@ -14,10 +14,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -40,7 +38,6 @@ fun WishlistCard(
     onCartClicked: () -> Unit,
     onChangeAmountClicked: () -> Unit,
     onMenuClicked: () -> Unit,
-    isAddedToCart: State<Boolean>,
     isLastItem: Boolean,
     modifier: Modifier = Modifier
 ) {
@@ -105,11 +102,11 @@ fun WishlistCard(
                     IconButton(onClick = onCartClicked) {
                         Icon(
                             tint =
-                            if (isAddedToCart.value) TestMarketTheme.colors.primary
+                            if (product.isInCart) TestMarketTheme.colors.primary
                             else TestMarketTheme.colors.text,
                             modifier = Modifier.size(24.dp),
                             painter = painterResource(
-                                if (isAddedToCart.value) Res.drawable.ic_cart_filled
+                                if (product.isInCart) Res.drawable.ic_cart_filled
                                 else Res.drawable.ic_cart_outlined
                             ),
                             contentDescription = null
@@ -117,7 +114,7 @@ fun WishlistCard(
                     }
                 }
                 if (!isLastItem)
-                    DefaultDivider()
+                    DefaultDivider(modifier = Modifier.padding(start = 16.dp, top = 8.dp))
             }
         }
     }

@@ -14,7 +14,6 @@ import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -32,7 +31,6 @@ fun CheckedProductCard(
     product: CheckedProduct,
     onChangeAmountClicked: () -> Unit,
     onChecked: (value: Boolean) -> Unit,
-    isChecked: State<Boolean>,
     isLastItem: Boolean,
     modifier: Modifier = Modifier
 ) {
@@ -46,12 +44,12 @@ fun CheckedProductCard(
             )
         ) {
             Checkbox(
-                modifier = Modifier.padding(start = 8.dp),
+                modifier = Modifier.padding(start = 20.dp, end = 8.dp).size(20.dp),
                 colors = CheckboxDefaults.colors(
                     checkedColor = TestMarketTheme.colors.primary,
                     uncheckedColor = TestMarketTheme.colors.secondary
                 ),
-                checked = isChecked.value,
+                checked = product.isChecked,
                 onCheckedChange = onChecked
             )
             AsyncImage(
@@ -94,7 +92,7 @@ fun CheckedProductCard(
                 }
 
                 if (!isLastItem)
-                    DefaultDivider()
+                    DefaultDivider(modifier = Modifier.padding(start = 16.dp, top = 8.dp))
             }
         }
     }
