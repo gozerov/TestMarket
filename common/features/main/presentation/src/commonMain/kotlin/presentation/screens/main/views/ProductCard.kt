@@ -14,7 +14,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -32,7 +31,7 @@ import views.DefaultButton
 import views.DefaultDivider
 
 @Composable
-fun ProductCard(
+internal fun ProductCard(
     product: Product,
     onCartClicked: () -> Unit,
     onShoppingListClicked: () -> Unit,

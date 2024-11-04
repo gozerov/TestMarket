@@ -5,7 +5,7 @@ import data.cache.models.toProductWithAmountList
 import domain.models.ProductWithAmount
 import domain.repositories.ShoppingListRepository
 
-class ShoppingListRepositoryImpl(
+internal class ShoppingListRepositoryImpl(
     private val shoppingListCache: ShoppingListCache
 ) : ShoppingListRepository {
 

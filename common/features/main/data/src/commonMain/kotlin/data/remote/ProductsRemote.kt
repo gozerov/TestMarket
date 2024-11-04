@@ -2,7 +2,7 @@ package data.remote
 
 import data.remote.models.RemoteProduct
 
-interface ProductsRemote {
+internal interface ProductsRemote {
 
     suspend fun getProducts(): List<RemoteProduct>
 

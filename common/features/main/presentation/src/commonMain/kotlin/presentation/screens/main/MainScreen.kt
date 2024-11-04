@@ -42,7 +42,6 @@ fun MainScreen(
     val viewAction = viewModel.viewActions().collectAsState(null).value
 
     LaunchedEffect(null) {
-        println("lets go")
         viewModel.obtainEvent(MainViewEvent.GetProducts)
     }
 

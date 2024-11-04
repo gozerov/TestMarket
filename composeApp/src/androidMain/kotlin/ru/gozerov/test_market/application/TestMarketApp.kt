@@ -4,6 +4,7 @@ import PlatformConfiguration
 import PlatformSDK
 import android.app.Application
 import cache.DriverFactory
+import views.ElevationResolver
 
 class TestMarketApp : Application() {
 
@@ -18,5 +19,6 @@ class TestMarketApp : Application() {
 fun TestMarketApp.initPlatformSDK() =
     PlatformSDK.init(
         driverFactory = DriverFactory(context = applicationContext),
-        platformConfiguration = PlatformConfiguration(context = applicationContext)
+        platformConfiguration = PlatformConfiguration(context = applicationContext),
+        elevationResolver = ElevationResolver()
     )

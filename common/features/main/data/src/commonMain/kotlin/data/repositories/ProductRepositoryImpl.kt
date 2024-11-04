@@ -7,7 +7,7 @@ import domain.repositories.ProductsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class ProductRepositoryImpl(
+internal class ProductRepositoryImpl(
     private val productsRemote: ProductsRemote,
     private val productsCache: ProductsCache
 ) : ProductsRepository {

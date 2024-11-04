@@ -13,7 +13,7 @@ import ru.gozerov.test_market.common.features.`shopping-list`.presentation.resou
 import theme.TestMarketTheme
 
 @Composable
-fun EmptyShoppingListView(modifier: Modifier = Modifier) {
+internal fun EmptyShoppingListView(modifier: Modifier = Modifier) {
     Box(modifier = modifier.then(Modifier.fillMaxSize()), contentAlignment = Alignment.Center) {
         Text(
             text = stringResource(Res.string.list_is_empty),

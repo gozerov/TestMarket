@@ -24,7 +24,7 @@ import ru.gozerov.test_market.common.features.`shopping-list`.presentation.resou
 import theme.TestMarketTheme
 
 @Composable
-fun RemoveFromListSheetContent(
+internal fun RemoveFromListSheetContent(
     product: ProductWithAmount,
     onRemoveClicked: () -> Unit,
     modifier: Modifier = Modifier

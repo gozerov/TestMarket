@@ -2,7 +2,7 @@ package data.cache
 
 import ru.gozerov.database.SelectableProduct
 
-interface CartCache {
+internal interface CartCache {
 
     suspend fun getCart(): List<SelectableProduct>
 

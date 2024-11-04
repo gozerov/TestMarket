@@ -52,7 +52,6 @@ navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", 
 kodein = { module = "org.kodein.di:kodein-di", version.ref = "kodein" }
 immutable-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "immutable-collections" }
 
-
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }

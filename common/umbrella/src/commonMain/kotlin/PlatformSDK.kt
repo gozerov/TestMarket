@@ -7,18 +7,21 @@ import di.coreModule
 import org.kodein.di.DI
 import org.kodein.di.bindSingleton
 import org.kodein.di.direct
+import views.ElevationResolver
 
 object PlatformSDK {
 
     fun init(
         platformConfiguration: PlatformConfiguration,
-        driverFactory: DriverFactory
+        driverFactory: DriverFactory,
+        elevationResolver: ElevationResolver
     ) {
         val umbrellaModule = DI.Module(
             name = "umbrella",
             init = {
                 bindSingleton<PlatformConfiguration> { platformConfiguration }
                 bindSingleton<DriverFactory> { driverFactory }
+                bindSingleton<ElevationResolver> { elevationResolver }
             }
         )
 

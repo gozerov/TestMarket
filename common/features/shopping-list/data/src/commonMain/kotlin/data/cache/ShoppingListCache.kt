@@ -2,7 +2,7 @@ package data.cache
 
 import ru.gozerov.database.ProductWithFlags
 
-interface ShoppingListCache {
+internal interface ShoppingListCache {
 
     suspend fun getShoppingListProduct(): List<ProductWithFlags>
 

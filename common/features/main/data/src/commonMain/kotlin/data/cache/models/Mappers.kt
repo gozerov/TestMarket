@@ -3,7 +3,7 @@ package data.cache.models
 import domain.models.ProductDTO
 import ru.gozerov.database.ProductWithFlags
 
-fun ProductWithFlags.toProductDTO() = ProductDTO(
+internal fun ProductWithFlags.toProductDTO() = ProductDTO(
     id = id.toInt(),
     name = name,
     description = description,

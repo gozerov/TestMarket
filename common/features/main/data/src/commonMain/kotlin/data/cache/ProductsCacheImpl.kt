@@ -5,7 +5,7 @@ import data.remote.models.RemoteProduct
 import domain.models.ProductDTO
 import ru.gozerov.database.AppDatabase
 
-class ProductsCacheImpl(
+internal class ProductsCacheImpl(
     private val appDatabase: AppDatabase
 ) : ProductsCache {
 

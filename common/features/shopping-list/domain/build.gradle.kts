@@ -6,10 +6,12 @@ plugins {
 
 kotlin {
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(project(path = ":common:core"))
-            }
+        commonMain.dependencies {
+            implementation(project(path = ":common:core"))
+        }
+
+        commonTest.dependencies { 
+            implementation(libs.kotlin.test)
         }
     }
 }

@@ -5,7 +5,7 @@ import data.cache.models.toCheckedProductList
 import domain.models.CheckedProduct
 import domain.repositories.CartRepository
 
-class CartRepositoryImpl(
+internal class CartRepositoryImpl(
     private val cartCache: CartCache
 ) : CartRepository {
 

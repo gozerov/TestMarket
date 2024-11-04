@@ -3,7 +3,7 @@ package data.cache
 import ru.gozerov.database.AppDatabase
 import ru.gozerov.database.SelectableProduct
 
-class CartCacheImpl(
+internal class CartCacheImpl(
     private val appDatabase: AppDatabase
 ) : CartCache {
 

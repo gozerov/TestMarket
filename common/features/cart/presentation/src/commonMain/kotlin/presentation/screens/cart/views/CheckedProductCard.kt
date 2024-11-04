@@ -27,7 +27,7 @@ import views.DefaultButton
 import views.DefaultDivider
 
 @Composable
-fun CheckedProductCard(
+internal fun CheckedProductCard(
     product: CheckedProduct,
     onChangeAmountClicked: () -> Unit,
     onChecked: (value: Boolean) -> Unit,

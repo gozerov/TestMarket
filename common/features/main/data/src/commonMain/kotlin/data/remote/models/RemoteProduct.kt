@@ -3,7 +3,7 @@ package data.remote.models
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RemoteProduct(
+internal data class RemoteProduct(
     val id: Int,
     val title: String,
     val description: String?,

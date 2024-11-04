@@ -13,7 +13,7 @@ import ru.gozerov.test_market.common.features.cart.presentation.resources.cart_i
 import theme.TestMarketTheme
 
 @Composable
-fun EmptyCartView(modifier: Modifier = Modifier) {
+internal fun EmptyCartView(modifier: Modifier = Modifier) {
     Box(modifier = modifier.then(Modifier.fillMaxSize()), contentAlignment = Alignment.Center) {
         Text(
             text = stringResource(Res.string.cart_is_empty),

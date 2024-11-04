@@ -23,7 +23,7 @@ import theme.TestMarketTheme
 import views.DefaultDivider
 
 @Composable
-fun FilledShoppingListView(
+internal fun FilledShoppingListView(
     products: ImmutableList<ProductWithAmount>,
     onCartClicked: (product: ProductWithAmount, isAddedToCart: Boolean) -> Unit,
     onChangeAmountClicked: () -> Unit,

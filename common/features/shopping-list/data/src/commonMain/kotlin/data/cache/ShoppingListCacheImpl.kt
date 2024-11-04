@@ -3,7 +3,7 @@ package data.cache
 import ru.gozerov.database.AppDatabase
 import ru.gozerov.database.ProductWithFlags
 
-class ShoppingListCacheImpl(
+internal class ShoppingListCacheImpl(
     private val appDatabase: AppDatabase
 ) : ShoppingListCache {
 

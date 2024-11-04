@@ -33,7 +33,7 @@ import views.DefaultButton
 import views.DefaultDivider
 
 @Composable
-fun WishlistCard(
+internal fun WishlistCard(
     product: ProductWithAmount,
     onCartClicked: () -> Unit,
     onChangeAmountClicked: () -> Unit,

@@ -3,7 +3,7 @@ package data.cache
 import data.remote.models.RemoteProduct
 import domain.models.ProductDTO
 
-interface ProductsCache {
+internal interface ProductsCache {
 
     suspend fun saveProducts(products: List<RemoteProduct>)
 

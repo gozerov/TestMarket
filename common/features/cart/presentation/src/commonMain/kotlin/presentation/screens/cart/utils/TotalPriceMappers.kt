@@ -1,6 +1,6 @@
 package presentation.screens.cart.utils
 
-fun getTotalProductsWord(count: Int): String {
+internal fun getTotalProductsWord(count: Int): String {
     val lastDigit = count % 10
     val lastTwoDigits = count % 100
 
