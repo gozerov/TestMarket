@@ -15,12 +15,17 @@ import theme.TestMarketTheme
 fun DefaultButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
+    isActive: Boolean = true,
     backgroundTint: Color = TestMarketTheme.colors.secondary,
     border: BorderStroke? = null,
     content: @Composable RowScope.() -> Unit,
 ) {
     Button(
-        colors = ButtonDefaults.buttonColors(backgroundColor = backgroundTint),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = backgroundTint,
+            disabledBackgroundColor = backgroundTint.copy(alpha = 0.6f)
+        ),
+        enabled = isActive,
         shape = RoundedCornerShape(4.dp),
         elevation = ButtonDefaults.elevation(0.dp),
         border = border,

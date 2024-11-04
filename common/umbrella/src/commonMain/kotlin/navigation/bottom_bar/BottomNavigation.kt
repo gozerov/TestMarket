@@ -23,6 +23,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import di.Injector
 import navigation.Screen
 import navigation.getTabIconPainter
 import navigation.getTabName
@@ -30,10 +31,12 @@ import presentation.screens.cart.CartScreen
 import presentation.screens.list.ShoppingListScreen
 import presentation.screens.main.MainScreen
 import theme.TestMarketTheme
+import views.ElevationResolver
 
 @Composable
 fun BottomNavigation() {
     val navController = rememberNavController()
+    val elevationResolver: ElevationResolver = Injector.instance()
     val items = listOf(
         Screen.MainFlow.BASE_ROUTE,
         Screen.ShoppingFlow.BASE_ROUTE,
@@ -70,6 +73,7 @@ fun BottomNavigation() {
 
         BottomNavigation(
             modifier = Modifier.align(Alignment.BottomStart),
+            elevation = elevationResolver.getBottomBarElevation(),
             backgroundColor = TestMarketTheme.colors.primaryBackground
         ) {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -80,7 +84,8 @@ fun BottomNavigation() {
                 BottomNavigationItem(
                     icon = {
                         Icon(
-                            modifier = Modifier.padding(vertical = 4.dp).size(20.dp).alpha(if (isSelected) 1f else 0.5f),
+                            modifier = Modifier.padding(vertical = 4.dp).size(20.dp)
+                                .alpha(if (isSelected) 1f else 0.5f),
                             painter = getTabIconPainter(screen),
                             contentDescription = screen,
                             tint = TestMarketTheme.colors.text

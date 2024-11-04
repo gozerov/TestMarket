@@ -1,6 +1,5 @@
 package presentation.screens.cart.views
 
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,8 +19,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -56,6 +53,7 @@ fun FilledCartView(
     onChangeAmountClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val isOrderActive = products.any { product -> product.isChecked }
 
     Column(
         modifier = modifier.then(Modifier.fillMaxSize())
@@ -89,18 +87,18 @@ fun FilledCartView(
                 color = TestMarketTheme.colors.text,
                 fontSize = 14.sp
             )
-            IconButton(onClick = onShoppingListClicked) {
+            IconButton(onClick = onShoppingListClicked, enabled = isOrderActive) {
                 Icon(
                     tint = TestMarketTheme.colors.text,
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(24.dp).alpha(if (isOrderActive) 1f else 0.5f),
                     painter = painterResource(ru.gozerov.test_market.common.core.Res.drawable.ic_favorite_outlined),
                     contentDescription = null
                 )
             }
-            IconButton(onClick = onClearClicked) {
+            IconButton(onClick = onClearClicked, enabled = isOrderActive) {
                 Icon(
                     tint = TestMarketTheme.colors.text,
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(24.dp).alpha(if (isOrderActive) 1f else 0.6f),
                     imageVector = Icons.Default.Clear,
                     contentDescription = null
                 )
@@ -133,40 +131,47 @@ fun FilledCartView(
                 item {
                     DefaultDivider()
                 }
-
-                item {
-                    Text(
-                        modifier = Modifier.padding(start = 16.dp, top = 8.dp).alpha(0.6f),
-                        text = stringResource(Res.string.total),
-                        color = TestMarketTheme.colors.text,
-                        fontSize = 12.sp
-                    )
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp)
-                    ) {
+                if (isOrderActive) {
+                    val checkedProducts = products.filter { product -> product.isChecked }
+                    item {
                         Text(
-                            text = "${products.size} ${getTotalProductsWord(products.size)}",
+                            modifier = Modifier.padding(start = 16.dp, top = 8.dp).alpha(0.6f),
+                            text = stringResource(Res.string.total),
                             color = TestMarketTheme.colors.text,
-                            fontSize = 14.sp
+                            fontSize = 12.sp
                         )
-                        Spacer(modifier = Modifier.weight(1f))
-                        Text(
-                            text = "${products.sumOf { product -> product.price }} ₽",
-                            color = TestMarketTheme.colors.text,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp)
+                        ) {
+                            Text(
+                                text = "${checkedProducts.size} ${
+                                    getTotalProductsWord(checkedProducts.size)
+                                }",
+                                color = TestMarketTheme.colors.text,
+                                fontSize = 14.sp
+                            )
+                            Spacer(modifier = Modifier.weight(1f))
+                            Text(
+                                text = "${checkedProducts.sumOf { product -> product.price }} ₽",
+                                color = TestMarketTheme.colors.text,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
                     }
                 }
 
                 item {
                     DefaultButton(
-                        modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth().height(48.dp),
+                        modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth()
+                            .height(48.dp),
                         onClick = {},
+                        isActive = isOrderActive,
                         backgroundTint = TestMarketTheme.colors.primary
                     ) {
                         Text(
+                            modifier = Modifier.alpha(if (isOrderActive) 1f else 0.6f),
                             text = stringResource(Res.string.place_an_order),
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
