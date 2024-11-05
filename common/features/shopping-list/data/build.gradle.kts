@@ -7,18 +7,19 @@ plugins {
 
 kotlin {
     sourceSets {
-        commonMain {
-            dependencies {
-                api(project(":common:features:shopping-list:domain"))
-                implementation(project(":common:core"))
-                implementation(project(":common:core-database"))
+        commonMain.dependencies {
+            api(project(":common:features:shopping-list:domain"))
+            implementation(project(":common:core"))
+            implementation(project(":common:core-database"))
 
-                implementation(libs.kodein)
-                implementation(libs.ktor.core)
-                implementation(libs.ktor.client.content.negotiation)
-                implementation(libs.ktor.logging)
-                implementation(libs.ktor.serialization.kotlinx.json)
-            }
+            implementation(libs.kodein)
+            implementation(libs.ktor.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.logging)
+            implementation(libs.ktor.serialization.kotlinx.json)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
         }
     }
 }
