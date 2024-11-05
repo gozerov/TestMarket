@@ -29,7 +29,7 @@
 <p align="center">
   <img src="https://i.imgur.com/RGJ8ufB.png" alt="Скриншот 1" width="200"/>
   <img src="https://i.imgur.com/w7beHln.png" alt="Скриншот 2" width="200"/>
-  <img src="https://i.imgur.com/w7beHln.png" alt="Скриншот 3" width="200"/>
+  <img src="https://i.imgur.com/oT5anXn.png" alt="Скриншот 3" width="200"/>
 </p>
 
 ---
