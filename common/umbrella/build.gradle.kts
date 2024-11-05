@@ -15,6 +15,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":common:core"))
+                implementation(project(":common:core-database"))
                 implementation(project(":common:features:cart:data"))
                 implementation(project(":common:features:cart:domain"))
                 implementation(project(":common:features:cart:presentation"))

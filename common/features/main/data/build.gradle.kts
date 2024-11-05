@@ -12,6 +12,7 @@ kotlin {
             dependencies {
                 api(project(":common:features:main:domain"))
                 implementation(project(":common:core"))
+                implementation(project(":common:core-database"))
 
                 implementation(libs.kodein)
                 implementation(libs.ktor.core)

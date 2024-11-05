@@ -3,6 +3,7 @@ import data.di.cartDataModule
 import data.di.mainDataModule
 import data.di.shoppingListDataModule
 import di.Injector
+import di.coreDatabaseModule
 import di.coreModule
 import org.kodein.di.DI
 import org.kodein.di.bindSingleton
@@ -30,6 +31,7 @@ object PlatformSDK {
                 importAll(
                     umbrellaModule,
                     coreModule,
+                    coreDatabaseModule,
                     mainDataModule,
                     shoppingListDataModule,
                     cartDataModule

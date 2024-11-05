@@ -11,6 +11,7 @@ kotlin {
             dependencies {
                 api(project(":common:features:cart:domain"))
                 implementation(project(":common:core"))
+                implementation(project(":common:core-database"))
 
                 implementation(libs.kodein)
                 implementation(libs.ktor.core)

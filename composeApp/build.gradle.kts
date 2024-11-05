@@ -33,6 +33,7 @@ kotlin {
             @OptIn(ExperimentalKotlinGradlePluginApi::class)
             transitiveExport = false
             export(project(":common:core"))
+            export(project(":common:core-database"))
             export(project(":common:umbrella"))
         }
     }
@@ -50,6 +51,7 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":common:umbrella"))
             implementation(project(":common:core"))
+            implementation(project(":common:core-database"))
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -66,6 +68,7 @@ kotlin {
             implementation(libs.native.driver)
             api(project(":common:core"))
             api(project(":common:umbrella"))
+            implementation(project(":common:core-database"))
         }
 
     }

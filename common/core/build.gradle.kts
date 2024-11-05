@@ -45,11 +45,3 @@ kotlin {
         }
     }
 }
-
-sqldelight {
-    databases {
-        create("AppDatabase") {
-            packageName.set("ru.gozerov.database")
-        }
-    }
-}
